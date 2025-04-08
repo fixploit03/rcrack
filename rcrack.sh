@@ -63,6 +63,7 @@ function help(){
 	echo -e "${b}Nama Modul             Fungsi${r}"
 	echo -e "${p}----------------       ----------------${r}"
 	echo -e "${p}zip_crack              Untuk mengcrack file ZIP${r}"
+	echo -e "${p}rar_crack              Untuk mengcrack file RAR${r}"
 	echo ""
 }
 
@@ -76,6 +77,14 @@ function rcrack(){
 				break
 			else
 				echo -e "${m}[-] ${p}File 'modul/zip_crack.sh' tidak ditemukan.${r}"
+				continue
+			fi
+		elif [[ "${rcrack}" == "use rar_crack" ]]; then
+			if [[ -f "modul/rar_crack.sh" ]]; then
+				bash "modul/rar_crack.sh"
+				break
+			else
+				echo -e "${m}[-] ${p}File 'modul/rar_crack.sh' tidak ditemukan.${r}"
 				continue
 			fi
 		elif [[ "${rcrack}" == "help" ]]; then
