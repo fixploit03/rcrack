@@ -1,0 +1,108 @@
+#!/bin/bash
+# -- / / --
+#
+#.......: rcrack.sh
+#.......: Script Bash untuk crack berbagai jenis file menggunakan John The Ripper
+#.......: main script (script utama)
+#
+# -- / / --
+#
+# Dibuat oleh: Rofi (Fixploit03)
+# Github: https://github.com/fixploit03/rcrack
+#
+# -- / / --
+#
+# Script ini merupakan pengembangan dari repositori Jono
+#
+# -- / / --
+
+# Variabel warna
+m="\e[1;31m"
+b="\e[1;34m"
+p="\e[1;37m"
+r="\e[0m"
+
+# Input
+im=$'\e[1;31m'
+ip=$'\e[1;37m'
+
+# Tentang
+program="rcrack"
+versi="v1.0"
+
+# Fugsi untuk error handling
+function error(){
+	echo -e "${m}[-] ${p}Ketikkan 'help' untuk menampilkan menu bantuan.${r}"
+}
+
+# Fungsi untuk keluar dari script
+function keluar(){
+	echo ""
+	echo -e "${p}Bye...${r}"
+	exit 1
+}
+
+# Fungsi untuk menampilkan menu help atau menu bantuan
+function help(){
+	echo -e ""
+	echo -e "${p}Selamat datang di menu help ${program}!${r}"
+	echo -e ""
+	echo -e "${b}[*] ${p}Menu help script:${r}"
+	echo ""
+	echo -e "${b}Command                Fungsi${r}"
+	echo -e "${p}----------------       ----------------${r}"
+	echo -e "${p}use [nama modul]       Untuk menggunakan modul yang ingin digunakan.${r}"
+	echo -e "${p}help                   Untuk menampilkan menu bantuan.${r}"
+	echo -e "${p}clear                  Untuk membersihkan layar terminal.${r}"
+	echo -e "${p}banner                 Untuk menampilkan banner.${r}"
+	echo -e "${p}version                Untuk menampilkan versi script${r}"
+	echo -e "${p}exit                   Untuk keluar dari script.${r}"
+	echo -e ""
+	echo -e "${b}[*] ${p}Daftar modul yang tersedia:${r}"
+	echo -e ""
+	echo -e "${b}Nama Modul             Fungsi${r}"
+	echo -e "${p}----------------       ----------------${r}"
+	echo -e "${p}zip_crack              Untuk mengcrack file ZIP${r}"
+	echo ""
+}
+
+# Fungsi utama script
+function rcrack(){
+	while true; do
+		read -p "${ip}rcrack > " rcrack
+		if [[ "${rcrack}" == "use zip_crack" ]]; then
+			if [[ -f "modul/zip_crack.sh" ]]; then
+				bash "modul/zip_crack.sh"
+				break
+			else
+				echo -e "${m}[-] ${p}File 'modul/zip_crack.sh' tidak ditemukan.${r}"
+				continue
+			fi
+		elif [[ "${rcrack}" == "help" ]]; then
+			help
+			continue
+		elif [[ "${rcrack}" == "clear" ]]; then
+			clear
+			continue
+		elif [[ "${rcrack}" == "banner" ]]; then
+			if [[ -f "script/banner.py" ]]; then
+				python3 "script/banner.py"
+				continue
+			else
+				echo -e "${m}[-] ${p}File 'script/banner.py' tidak ditemukan."
+				continue
+			fi
+		elif [[ "${rcrack}" == "version" ]]; then
+			echo -e "${p}${versi}${r}"
+			continue
+		elif [[ "${rcrack}" == "exit" ]]; then
+			keluar
+			break
+		else
+			error
+			continue
+		fi
+	done
+}
+
+rcrack
