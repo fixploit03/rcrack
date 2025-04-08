@@ -184,7 +184,7 @@ function zip_crack(){
 					echo -e "${m}[-] ${p}Panjang maksimal kata sandi harus berupa angka.${r}"
 					continue
 				fi
-				if [[ "${panjang_mask}" =~ ^0 ]]; then
+				if [[ "${panjang_maks}" =~ ^0 ]]; then
 					echo -e "${m}[-] ${p}Panjang maksimal kata sandi tidak boleh diawali dengan angka 0.${r}"
 					continue
 				fi
