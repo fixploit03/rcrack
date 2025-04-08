@@ -32,7 +32,7 @@ program="rcrack"
 versi="v1.0"
 modul="zip_crack"
 
-# Fugsi untuk error handling
+# Fungsi untuk error handling
 function error(){
 	echo -e "${m}[-] ${p}Ketikkan 'help' untuk menampilkan menu bantuan.${r}"
 }
@@ -70,7 +70,7 @@ function help(){
 	echo -e "${p}brute                                   Mencoba semua kemungkinan kombinasi karakter secara menyeluruh hingga menemukan kata sandi yang benar.${r}"
 	echo -e "${p}prince                                  Mencoba berbagai kombinasi dari kata-kata dalam file Wordlist.${r}"
 	echo -e "${p}mask                                    Mencoba berbagai pola tertentu untuk mempersempit ruang pencarian kata sandi.${r}"
-	echo -e "${p}Subsets                                 Mencoba semua kombinasi mungkin dari subset karakter tertentu.${r}"
+	echo -e "${p}subsets                                 Mencoba semua kombinasi mungkin dari subset karakter tertentu.${r}"
 	echo ""
 	echo -e "${b}[*] ${p}Daftar pola mask:${r}"
 	echo ""
@@ -153,7 +153,7 @@ function zip_crack(){
 			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "wordlist_file" ]]; then
 				file_wordlist="${zip_c[2]}"
 				if [[ ! -f "${file_wordlist}" ]]; then
-					echo -e "${m}[-] File Wordlist '${file_wordlist}' tidak ditemukan.${r}"
+					echo -e "${m}[-] ${p}File Wordlist '${file_wordlist}' tidak ditemukan.${r}"
 					continue
 				fi
 				echo -e "${p}File Wordlist => ${file_wordlist}${r}"
