@@ -217,206 +217,210 @@ function zip_crack(){
 			fi
 		elif [[ "${#zip_c[@]}" -eq 1 ]]; then
 			if [[ "${zip_c[0]}" == "run" ]]; then
-				if [[ -z "${teknik}" ]]; then
+				if [[ -z "${file_zip}" ]]; then
+					echo -e "${m}[-] ${p}File ZIP belum diseting.${r}"
+					continue
+				elif [[ -z "${teknik}" ]]; then
 					echo -e "${m}[-] ${p}Teknik belum diseting.${r}"
 					continue
-				fi
-				if [[ "${teknik}" == "Dictionary Attack" ]]; then
-					if [[ -z "${file_wordlist}" ]]; then
-						echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
-						continue
-					fi
-					echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
-					file_hash="${file_zip}_hash.txt"
-					zip2john "${file_zip}" > "${file_hash}"
-					if [[ $? -ne 0 ]]; then
-						echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
-						continue
-					fi
-					echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
-					if grep -qi "pkzip" "${file_hash}"; then
-						format="PKZIP"
-					elif grep -qi "zip2" "${file_hash}"; then
-						format="zip2"
-					fi
-					echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
-					john --wordlist="${file_wordlist}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
-					john --show "${file_hash}" --pot="pot.txt" --format="${format}"
-					if [[ -f "pot.txt" ]]; then
-						if grep -qo ":" "pot.txt"; then
-							kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
-							echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
-							echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+				else
+					if [[ "${teknik}" == "Dictionary Attack" ]]; then
+						if [[ -z "${file_wordlist}" ]]; then
+							echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
+							continue
+						fi
+						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
+						file_hash="${file_zip}_hash.txt"
+						zip2john "${file_zip}" > "${file_hash}"
+						if [[ $? -ne 0 ]]; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
+						if grep -qi "pkzip" "${file_hash}"; then
+							format="PKZIP"
+						elif grep -qi "zip2" "${file_hash}"; then
+							format="zip2"
+						fi
+						echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
+						john --wordlist="${file_wordlist}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
+						john --show "${file_hash}" --pot="pot.txt" --format="${format}"
+						if [[ -f "pot.txt" ]]; then
+							if grep -qo ":" "pot.txt"; then
+								kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
+								echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
+								echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+							else
+								echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
+							fi
 						else
+							echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
 							echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
 						fi
-					else
-						echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
-						echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
-					fi
-					rm "pot.txt" "${file_hash}"
-					echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
-					continue
-				elif [[ "${teknik}" == "Brute Force Attack" ]]; then
-					if [[ -z "${panjang_min}" ]]; then
-						echo "[-] Panjang minimal kata sandi belum diseting."
+						rm "pot.txt" "${file_hash}"
+						echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
 						continue
-					fi
-					if [[ -z "${panjang_maks}" ]]; then
-						echo "[-] Panjang maksimal kata sandi belum diseting."
-						continue
-					fi
-					if [[ ! "${panjang_maks}" -ge "${panjang_min}" ]]; then
-						echo "[-] Panjang maksimal kata sandi harus lebih besar atau sama dengan panjang minimal kata sandi."
-						continue
-					fi
-					echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
-					file_hash="${file_zip}_hash.txt"
-					zip2john "${file_zip}" > "${file_hash}"
-					if [[ $? -ne 0 ]]; then
-						echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
-						continue
-					fi
-					echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
-					if grep -qi "pkzip" "${file_hash}"; then
-						format="PKZIP"
-					elif grep -qi "zip2" "${file_hash}"; then
-						format="zip2"
-					fi
-					echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
-					john --incremental --min-length="${panjang_min}" --max-length="${panjang_maks}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
-					john --show "${file_hash}" --pot="pot.txt" --format="${format}"
-					if [[ -f "pot.txt" ]]; then
-						if grep -qo ":" "pot.txt"; then
-							kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
-							echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
-							echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+					elif [[ "${teknik}" == "Brute Force Attack" ]]; then
+						if [[ -z "${panjang_min}" ]]; then
+							echo "[-] Panjang minimal kata sandi belum diseting."
+							continue
+						fi
+						if [[ -z "${panjang_maks}" ]]; then
+							echo "[-] Panjang maksimal kata sandi belum diseting."
+							continue
+						fi
+						if [[ ! "${panjang_maks}" -ge "${panjang_min}" ]]; then
+							echo "[-] Panjang maksimal kata sandi harus lebih besar atau sama dengan panjang minimal kata sandi."
+							continue
+						fi
+						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
+						file_hash="${file_zip}_hash.txt"
+						zip2john "${file_zip}" > "${file_hash}"
+						if [[ $? -ne 0 ]]; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
+						if grep -qi "pkzip" "${file_hash}"; then
+							format="PKZIP"
+						elif grep -qi "zip2" "${file_hash}"; then
+							format="zip2"
+						fi
+						echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
+						john --incremental --min-length="${panjang_min}" --max-length="${panjang_maks}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
+						john --show "${file_hash}" --pot="pot.txt" --format="${format}"
+						if [[ -f "pot.txt" ]]; then
+							if grep -qo ":" "pot.txt"; then
+								kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
+								echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
+								echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+							else
+								echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
+							fi
 						else
+							echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
 							echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
 						fi
-					else
-						echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
-						echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
-					fi
-					rm "pot.txt" "${file_hash}"
-					echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
-					continue
-				elif [[ "${teknik}" == "Prince Attack" ]]; then
-					if [[ -z "${file_wordlist}" ]]; then
-						echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
+						rm "pot.txt" "${file_hash}"
+						echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
 						continue
-					fi
-					echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
-					file_hash="${file_zip}_hash.txt"
-					zip2john "${file_zip}" > "${file_hash}"
-					if [[ $? -ne 0 ]]; then
-						echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
-						continue
-					fi
-					echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
-					if grep -qi "pkzip" "${file_hash}"; then
-						format="PKZIP"
-					elif grep -qi "zip2" "${file_hash}"; then
-						format="zip2"
-					fi
-					echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
-					john --prince="${file_wordlist}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
-					john --show "${file_hash}" --pot="pot.txt" --format="${format}"
-					if [[ -f "pot.txt" ]]; then
-						if grep -qo ":" "pot.txt"; then
-							kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
-							echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
-							echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+					elif [[ "${teknik}" == "Prince Attack" ]]; then
+						if [[ -z "${file_wordlist}" ]]; then
+							echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
+							continue
+						fi
+						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
+						file_hash="${file_zip}_hash.txt"
+						zip2john "${file_zip}" > "${file_hash}"
+						if [[ $? -ne 0 ]]; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
+						if grep -qi "pkzip" "${file_hash}"; then
+							format="PKZIP"
+						elif grep -qi "zip2" "${file_hash}"; then
+							format="zip2"
+						fi
+						echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
+						john --prince="${file_wordlist}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
+						john --show "${file_hash}" --pot="pot.txt" --format="${format}"
+						if [[ -f "pot.txt" ]]; then
+							if grep -qo ":" "pot.txt"; then
+								kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
+								echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
+								echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+							else
+								echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
+							fi
 						else
+							echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
 							echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
 						fi
-					else
-						echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
-						echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
-					fi
-					rm "pot.txt" "${file_hash}"
-					echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
-					continue
-				elif [[ "${teknik}" == "Mask Attack" ]]; then
-					if [[ -z "${mask_pattern}" ]]; then
-						echo -e "${m}[-] ${p}Pola mask belum diseting.${r}"
+						rm "pot.txt" "${file_hash}"
+						echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
 						continue
-					fi
-					echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
-					file_hash="${file_zip}_hash.txt"
-					zip2john "${file_zip}" > "${file_hash}"
-					if [[ $? -ne 0 ]]; then
-						echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
-						continue
-					fi
-					echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
-					if grep -qi "pkzip" "${file_hash}"; then
-						format="PKZIP"
-					elif grep -qi "zip2" "${file_hash}"; then
-						format="zip2"
-					fi
-					echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
-					john --mask="${mask_pattern}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
-					john --show "${file_hash}" --pot="pot.txt" --format="${format}"
-					if [[ -f "pot.txt" ]]; then
-						if grep -qo ":" "pot.txt"; then
-							kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
-							echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
-							echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+					elif [[ "${teknik}" == "Mask Attack" ]]; then
+						if [[ -z "${mask_pattern}" ]]; then
+							echo -e "${m}[-] ${p}Pola mask belum diseting.${r}"
+							continue
+						fi
+						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
+						file_hash="${file_zip}_hash.txt"
+						zip2john "${file_zip}" > "${file_hash}"
+						if [[ $? -ne 0 ]]; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
+						if grep -qi "pkzip" "${file_hash}"; then
+							format="PKZIP"
+						elif grep -qi "zip2" "${file_hash}"; then
+							format="zip2"
+						fi
+						echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
+						john --mask="${mask_pattern}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
+						john --show "${file_hash}" --pot="pot.txt" --format="${format}"
+						if [[ -f "pot.txt" ]]; then
+							if grep -qo ":" "pot.txt"; then
+								kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
+								echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
+								echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+							else
+								echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
+							fi
 						else
+							echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
 							echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
 						fi
-					else
-						echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
-						echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
-					fi
-					rm "pot.txt" "${file_hash}"
-					echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
-					continue
-				elif [[ "${teknik}" == "Subsets Attack" ]]; then
-					if [[ -z "${charset}" ]]; then
-						echo -e "${m}[-] ${p}Karakter belum diseting.${r}"
+						rm "pot.txt" "${file_hash}"
+						echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
 						continue
-					fi
-					if [[ -z "${panjang_min}" ]]; then
-						echo -e "${m}[-] ${p}Panjang minimal kata sandi belum diseting.${r}"
-						continue
-					fi
-					if [[ -z "${panjang_maks}" ]]; then
-						echo -r "${m}[-] ${p}Panjang maksimal kata sandi belum diseting.${r}"
-						continue
-					fi
-					echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
-					file_hash="${file_zip}_hash.txt"
-					zip2john "${file_zip}" > "${file_hash}"
-					if [[ $? -ne 0 ]]; then
-						echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
-						continue
-					fi
-					echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
-					if grep -qi "pkzip" "${file_hash}"; then
-						format="PKZIP"
-					elif grep -qi "zip2" "${file_hash}"; then
-						format="zip2"
-					fi
-					echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
-					john --subsets="${charset}" --min-length="${panjang_min}" --max-length="${panjang_maks}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
-					john --show "${file_hash}" --pot="pot.txt" --format="${format}"
-					if [[ -f "pot.txt" ]]; then
-						if grep -qo ":" "pot.txt"; then
-							kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
-							echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
-							echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+					elif [[ "${teknik}" == "Subsets Attack" ]]; then
+						if [[ -z "${charset}" ]]; then
+							echo -e "${m}[-] ${p}Karakter belum diseting.${r}"
+							continue
+						fi
+						if [[ -z "${panjang_min}" ]]; then
+							echo -e "${m}[-] ${p}Panjang minimal kata sandi belum diseting.${r}"
+							continue
+						fi
+						if [[ -z "${panjang_maks}" ]]; then
+							echo -r "${m}[-] ${p}Panjang maksimal kata sandi belum diseting.${r}"
+							continue
+						fi
+						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
+						file_hash="${file_zip}_hash.txt"
+						zip2john "${file_zip}" > "${file_hash}"
+						if [[ $? -ne 0 ]]; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
+						if grep -qi "pkzip" "${file_hash}"; then
+							format="PKZIP"
+						elif grep -qi "zip2" "${file_hash}"; then
+							format="zip2"
+						fi
+						echo -e "${b}[*] ${p}Mengcrack kata sandi file ZIP '${file_zip}'...${r}"
+						john --subsets="${charset}" --min-length="${panjang_min}" --max-length="${panjang_maks}" "${file_hash}" --pot="pot.txt" --format="${format}" --progress-every=1 --verbosity=6
+						john --show "${file_hash}" --pot="pot.txt" --format="${format}"
+						if [[ -f "pot.txt" ]]; then
+							if grep -qo ":" "pot.txt"; then
+								kata_sandi=$(cat "pot.txt" | cut -d ':' -f 2)
+								echo -e "${h}[+] ${p}Kata sandi file ZIP '${file_zip}' ditemukan.${r}"
+								echo -e "${h}[+] ${p}Kata sandi: ${h}${kata_sandi}${r}"
+							else
+								echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
+							fi
 						else
+							echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
 							echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
 						fi
-					else
-						echo -e "${m}[-] ${p}File 'pot.txt' tidak ditemukan.${r}"
-						echo -e "${m}[-] ${p}Kata sandi file ZIP '${file_zip}' tidak ditemukan.${r}"
+						rm "pot.txt" "${file_hash}"
+						echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
+						continue
 					fi
-					rm "pot.txt" "${file_hash}"
-					echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
-					continue
 				fi
 			elif [[ "${zip_c[0]}" == "back" ]]; then
 				if [[ -f "rcrack.sh" ]]; then
