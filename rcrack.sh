@@ -55,15 +55,16 @@ function help(){
 	echo -e "${p}help                   Untuk menampilkan menu bantuan.${r}"
 	echo -e "${p}clear                  Untuk membersihkan layar terminal.${r}"
 	echo -e "${p}banner                 Untuk menampilkan banner.${r}"
-	echo -e "${p}version                Untuk menampilkan versi script${r}"
+	echo -e "${p}version                Untuk menampilkan versi script.${r}"
 	echo -e "${p}exit                   Untuk keluar dari script.${r}"
 	echo -e ""
 	echo -e "${b}[*] ${p}Daftar modul yang tersedia:${r}"
 	echo -e ""
 	echo -e "${b}Nama Modul             Fungsi${r}"
 	echo -e "${p}----------------       ----------------${r}"
-	echo -e "${p}zip_crack              Untuk mengcrack file ZIP${r}"
-	echo -e "${p}rar_crack              Untuk mengcrack file RAR${r}"
+	echo -e "${p}zip_crack              Untuk mengcrack file ZIP.${r}"
+	echo -e "${p}rar_crack              Untuk mengcrack file RAR.${r}"
+	echo -e "${p}7z_crack               Untuk mengcrack file 7z.${r}"
 	echo ""
 }
 
@@ -85,6 +86,14 @@ function rcrack(){
 				break
 			else
 				echo -e "${m}[-] ${p}File 'modul/rar_crack.sh' tidak ditemukan.${r}"
+				continue
+			fi
+		elif [[ "${rcrack}" == "use 7z_crack" ]]; then
+			if [[ -f "modul/7z_crack.sh" ]]; then
+				bash "modul/7z_crack.sh"
+				break
+			else
+				echo -e "${m}[-] ${p}File 'modul/7z_crack.sh' tidak ditemukan.${r}"
 				continue
 			fi
 		elif [[ "${rcrack}" == "help" ]]; then
