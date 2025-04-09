@@ -65,6 +65,7 @@ function help(){
 	echo -e "${p}zip_crack              Untuk mengcrack file ZIP.${r}"
 	echo -e "${p}rar_crack              Untuk mengcrack file RAR.${r}"
 	echo -e "${p}7z_crack               Untuk mengcrack file 7z.${r}"
+	echo -e "${p}pdf_crack              Untuk mengcrack file PDF.${r}"
 	echo ""
 }
 
@@ -94,6 +95,14 @@ function rcrack(){
 				break
 			else
 				echo -e "${m}[-] ${p}File 'modul/7z_crack.sh' tidak ditemukan.${r}"
+				continue
+			fi
+		elif [[ "${rcrack}" == "use pdf_crack" ]]; then
+			if [[ -f "modul/pdf_crack.sh" ]]; then
+				bash "modul/pdf_crack.sh"
+				break
+			else
+				echo -e "${m}[-] ${p}File 'modul/pdf_crack.sh' tidak ditemukan.${r}"
 				continue
 			fi
 		elif [[ "${rcrack}" == "help" ]]; then
