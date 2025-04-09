@@ -21,6 +21,7 @@ from colorama import Fore, Style
 
 m = Fore.LIGHTRED_EX
 h = Fore.LIGHTGREEN_EX
+k = Fore.LIGHTYELLOW_EX
 b = Fore.LIGHTBLUE_EX
 p = Fore.LIGHTWHITE_EX
 r = Style.RESET_ALL
@@ -72,6 +73,34 @@ f"""
 {b}[*] {p}{deskripsi}{r}
 {b}[*] {p}Dibuat oleh: {pembuat}{r}
 {b}[*] {p}Github: {github}{r}
+""",
+f"""
+{m}          .                                                      .{r}
+{m}        .n                   .                 .                  n.{r}
+{m}  .   .dP                  dP                   9b                 9b.    .{r}
+{m} 4    qXb         .       dX                     Xb       .        dXp     t{r}
+{m}dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb{r}
+{m}9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP{r}
+{m} 9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP{r}
+{m}  `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'{r}
+{m}    `9XXXXXXXXXXXP' `9XX'          `98v8P'          `XXP' `9XXXXXXXXXXXP'{r}
+{m}        ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~{r}
+{m}                        )b.  .dbo.dP'`v'`9b.odb.  .dX({r}
+{m}                      ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.{r}
+{m}                     dXXXXXXXXXXXP'   .   `9XXXXXXXXXXXb{r}
+{m}                    dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb{r}
+{m}                    9XXb'   `XXXXXb.dX|Xb.dXXXXX'   `dXXP{r}
+{m}                     `'      9XXXXXX(   )XXXXXXP      `'{r}
+{m}                              XXXX X.`v'.X XXXX{r}
+{m}                              XP^X'`b   d'`X^XX{r}
+{m}                              X. 9  `   '  P )X{r}
+{m}                              `b  `       '  d'{r}
+{m}                               `             '{r}
+{m}
+{b}   * {h}){k}--{h}(+) {p}Crack berbagai jenis file menggunakan John The Ripper {h}(+){k}--{h}( {b}*{r}
+{b}   * {h}){k}--------------{h}(+) {p}Dibuat oleh: Rofi (Fixploit03) {h}(+){k}-------------{h}( {b}*{r}
+{b}   * {h}){k}-----------------------{h}(+) {p}Versi: v1.0 {h}(+){k}-----------------------{h}( {b}*{r}
+{b}   * {h}){k}-------{h}(+) {p}Github: https://github.com/fixploit03/rcrack {h}(+){k}------{h}( {b}*{r}
 """]
 
 print(random.choice(daftar_banner))
