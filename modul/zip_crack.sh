@@ -116,6 +116,9 @@ function zip_crack(){
 				fi
 				echo -e "${p}File ZIP => ${file_zip}${r}"
 				continue
+			else
+				error
+				continue
 			fi
 			# seting teknik
 			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "technique" ]];  then
@@ -148,6 +151,9 @@ function zip_crack(){
 				fi
 				echo -e "${p}Teknik => ${teknik}${r}"
 				continue
+			else
+				error
+				continue
 			fi
 			# seting wordlist
 			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "wordlist_file" ]]; then
@@ -157,6 +163,9 @@ function zip_crack(){
 					continue
 				fi
 				echo -e "${p}File Wordlist => ${file_wordlist}${r}"
+				continue
+			else
+				error
 				continue
 			fi
 			# seting panjang minimal kata sandi
@@ -175,6 +184,9 @@ function zip_crack(){
 					continue
 				fi
 				echo -e "${p}Panjang minimal kata sandi => ${panjang_min}${r}"
+				continue
+			else
+				error
 				continue
 			fi
 			# seting panjang maksimal kata sandi
@@ -200,8 +212,12 @@ function zip_crack(){
 				fi
 				echo -e "${p}Panjang maksimal kata sandi => ${panjang_maks}${r}"
 				continue
+			else
+				error
+				continue
+			fi
 			# seting mask pattern atau pola mask
-			elif [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "mask_pattern" ]]; then
+			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "mask_pattern" ]]; then
 				mask_pattern="${zip_c[2]}"
 				if [[ ! "${mask_pattern}" =~ ^(\?l|\?u|\?d|\?s|\?a)+$ ]]; then
 					echo -e "${m}[-] ${p}Pola mask '${mask_pattern}' tidak valid.${r}"
@@ -209,10 +225,17 @@ function zip_crack(){
 				fi
 				echo -e "${p}Pola mask => ${mask_pattern}${r}"
 				continue
+			else
+				error
+				continue
+			fi
 			# seting set karakter
-			elif [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "charset" ]]; then
+			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "charset" ]]; then
 				charset="${zip_c[2]}"
 				echo -e "${p}Karakter => ${charset}${r}"
+				continue
+			else
+				error
 				continue
 			fi
 		elif [[ "${#zip_c[@]}" -eq 1 ]]; then
