@@ -101,7 +101,7 @@ function zip_crack(){
 		read -p "${ip}${program} (${im}${modul}${ip}) > " -a zip_c
 		if [[ "${#zip_c[@]}" -eq 3 ]]; then
 			# seting file zip
-			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "zip_file" ]]; then
+			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "zip_file" && -n "${zip_c[2]}" ]]; then
 				file_zip="${zip_c[2]}"
 				# cek apakah file zip ada apa kaga
 				if [[ ! -f "${file_zip}" ]]; then
@@ -109,18 +109,14 @@ function zip_crack(){
 					continue
 				fi
 				# cek apakah file zip merupakan file zip atau tidak
-                if ! file "${file_zip}" | grep -qi "Zip archive data"; then
+		                if ! file "${file_zip}" | grep -qi "Zip archive data"; then
 					echo -e "${m}[-] ${p}File '${file_zip}' bukan file ZIP.${r}"
 					continue
 				fi
 				echo -e "${p}File ZIP => ${file_zip}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting teknik
-			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "technique" ]];  then
+			elif [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "technique" && -n "${zip_c[2]}" ]];  then
 				daftar_teknik=("dict" "brute" "prince" "mask" "subsets")
 				teknik="${zip_c[2]}"
 				teknik_valid=false
@@ -150,12 +146,8 @@ function zip_crack(){
 				fi
 				echo -e "${p}Teknik => ${teknik}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting wordlist
-			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "wordlist_file" ]]; then
+			elif [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "wordlist_file" && -n "${zip_c[2]}" ]]; then
 				file_wordlist="${zip_c[2]}"
 				if [[ ! -f "${file_wordlist}" ]]; then
 					echo -e "${m}[-] ${p}File Wordlist '${file_wordlist}' tidak ditemukan.${r}"
@@ -163,12 +155,8 @@ function zip_crack(){
 				fi
 				echo -e "${p}File Wordlist => ${file_wordlist}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting panjang minimal kata sandi
-			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "min_length" ]]; then
+			elif [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "min_length" && -n "${zip_c[2]}" ]]; then
 				panjang_min="${zip_c[2]}"
 				if [[ ! "${panjang_min}" =~ ^[0-9]+$ ]]; then
 					echo -e "${m}[-] ${p}Panjang minimal kata sandi harus berupa angka.${r}"
@@ -184,12 +172,8 @@ function zip_crack(){
 				fi
 				echo -e "${p}Panjang minimal kata sandi => ${panjang_min}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting panjang maksimal kata sandi
-			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "max_length" ]]; then
+			elif [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "max_length" && -n "${zip_c[2]}" ]]; then
 				panjang_maks="${zip_c[2]}"
 				if [[ ! "${panjang_maks}" =~ ^[0-9]+$ ]]; then
 					echo -e "${m}[-] ${p}Panjang maksimal kata sandi harus berupa angka.${r}"
@@ -211,12 +195,8 @@ function zip_crack(){
 				fi
 				echo -e "${p}Panjang maksimal kata sandi => ${panjang_maks}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting mask pattern atau pola mask
-			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "mask_pattern" ]]; then
+			elif [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "mask_pattern" && -n "${zip_c[2]}" ]]; then
 				mask_pattern="${zip_c[2]}"
 				if [[ ! "${mask_pattern}" =~ ^(\?l|\?u|\?d|\?s|\?a)+$ ]]; then
 					echo -e "${m}[-] ${p}Pola mask '${mask_pattern}' tidak valid.${r}"
@@ -224,12 +204,8 @@ function zip_crack(){
 				fi
 				echo -e "${p}Pola mask => ${mask_pattern}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting set karakter
-			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "charset" ]]; then
+			elif [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "charset" && -n "${zip_c[2]}" ]]; then
 				charset="${zip_c[2]}"
 				echo -e "${p}Karakter => ${charset}${r}"
 				continue
@@ -239,7 +215,7 @@ function zip_crack(){
 			fi
 		elif [[ "${#zip_c[@]}" -eq 1 ]]; then
 			if [[ "${zip_c[0]}" == "run" ]]; then
-				if [[ -z "${file_zip}" ]]; then
+				if [[ -z "${file_zip}" || ! -f "${file_zip}" ]]; then
 					echo -e "${m}[-] ${p}File ZIP belum diseting.${r}"
 					continue
 				elif [[ -z "${teknik}" ]]; then
@@ -247,7 +223,7 @@ function zip_crack(){
 					continue
 				else
 					if [[ "${teknik}" == "Dictionary Attack" ]]; then
-						if [[ -z "${file_wordlist}" ]]; then
+						if [[ -z "${file_wordlist}" || ! -f "${file_wordlist}" ]]; then
 							echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
 							continue
 						fi
@@ -327,7 +303,7 @@ function zip_crack(){
 						echo -e "${b}[*] ${p}Proses crack kata sandi file ZIP '${file_zip}' selesai.${r}"
 						continue
 					elif [[ "${teknik}" == "Prince Attack" ]]; then
-						if [[ -z "${file_wordlist}" ]]; then
+						if [[ -z "${file_wordlist}" || ! -f "${file_wordlist}" ]]; then
 							echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
 							continue
 						fi

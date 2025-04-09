@@ -101,7 +101,7 @@ function f7z_crack(){
 		read -p "${ip}${program} (${im}${modul}${ip}) > " -a i7z_c
 		if [[ "${#i7z_c[@]}" -eq 3 ]]; then
 			# seting file 7z
-			if [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "7z_file" ]]; then
+			if [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "7z_file" && -n "${i7z_c[2]}" ]]; then
 				file_7z="${i7z_c[2]}"
 				# cek apakah file 7z ada apa kaga
 				if [[ ! -f "${file_7z}" ]]; then
@@ -109,18 +109,14 @@ function f7z_crack(){
 					continue
 				fi
 				# cek apakah file 7z merupakan file 7z atau tidak
-                if ! file "${file_7z}" | grep -qi "7-zip archive data"; then
+		                if ! file "${file_7z}" | grep -qi "7-zip archive data"; then
 					echo -e "${m}[-] ${p}File '${file_7z}' bukan file 7z.${r}"
 					continue
 				fi
 				echo -e "${p}File 7z => ${file_7z}${r}"
 				continue
-            else
-                error
-                continue
-			fi
 			# seting teknik
-			if [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "technique" ]];  then
+			elif [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "technique" && -n "${i7z_c[2]}" ]];  then
 				daftar_teknik=("dict" "brute" "prince" "mask" "subsets")
 				teknik="${i7z_c[2]}"
 				teknik_valid=false
@@ -150,12 +146,8 @@ function f7z_crack(){
 				fi
 				echo -e "${p}Teknik => ${teknik}${r}"
 				continue
-            else
-                error
-                continue
-			fi
 			# seting wordlist
-			if [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "wordlist_file" ]]; then
+			elif [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "wordlist_file" && -n "${i7z_c[2]}" ]]; then
 				file_wordlist="${i7z_c[2]}"
 				if [[ ! -f "${file_wordlist}" ]]; then
 					echo -e "${m}[-] ${p}File Wordlist '${file_wordlist}' tidak ditemukan.${r}"
@@ -163,12 +155,8 @@ function f7z_crack(){
 				fi
 				echo -e "${p}File Wordlist => ${file_wordlist}${r}"
 				continue
-            else
-                error
-                continue
-            fi
 			# seting panjang minimal kata sandi
-			if [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "min_length" ]]; then
+			elif [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "min_length" && -n "${i7z_c[2]}" ]]; then
 				panjang_min="${i7z_c[2]}"
 				if [[ ! "${panjang_min}" =~ ^[0-9]+$ ]]; then
 					echo -e "${m}[-] ${p}Panjang minimal kata sandi harus berupa angka.${r}"
@@ -184,12 +172,8 @@ function f7z_crack(){
 				fi
 				echo -e "${p}Panjang minimal kata sandi => ${panjang_min}${r}"
 				continue
-            else
-                error
-                continue
-            fi
 			# seting panjang maksimal kata sandi
-			if [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "max_length" ]]; then
+			elif [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "max_length" && -n "${i7z_c[2]}" ]]; then
 				panjang_maks="${i7z_c[2]}"
 				if [[ ! "${panjang_maks}" =~ ^[0-9]+$ ]]; then
 					echo -e "${m}[-] ${p}Panjang maksimal kata sandi harus berupa angka.${r}"
@@ -211,12 +195,8 @@ function f7z_crack(){
 				fi
 				echo -e "${p}Panjang maksimal kata sandi => ${panjang_maks}${r}"
 				continue
-            else
-                error
-                continue
-            fi
 			# seting mask pattern atau pola mask
-			if [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "mask_pattern" ]]; then
+			elif [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "mask_pattern" && -n "${i7z_c[2]}" ]]; then
 				mask_pattern="${i7z_c[2]}"
 				if [[ ! "${mask_pattern}" =~ ^(\?l|\?u|\?d|\?s|\?a)+$ ]]; then
 					echo -e "${m}[-] ${p}Pola mask '${mask_pattern}' tidak valid.${r}"
@@ -224,22 +204,18 @@ function f7z_crack(){
 				fi
 				echo -e "${p}Pola mask => ${mask_pattern}${r}"
 				continue
-            else
-                error
-                continue
-            fi
 			# seting set karakter
-			if [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "charset" ]]; then
+			elif [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "charset" && -n "${i7z_c[2]}" ]]; then
 				charset="${i7z_c[2]}"
 				echo -e "${p}Karakter => ${charset}${r}"
 				continue
-            else
-                error
-                continue
-            fi
+	                else
+        		        error
+		                continue
+		        fi
 		elif [[ "${#i7z_c[@]}" -eq 1 ]]; then
 			if [[ "${i7z_c[0]}" == "run" ]]; then
-				if [[ -z "${file_7z}" ]]; then
+				if [[ -z "${file_7z}" || ! -f "${file_7z}" ]]; then
 					echo -e "${m}[-] ${p}File 7z belum diseting.${r}"
 					continue
 				elif [[ -z "${teknik}" ]]; then
@@ -247,7 +223,7 @@ function f7z_crack(){
 					continue
 				else
 					if [[ "${teknik}" == "Dictionary Attack" ]]; then
-						if [[ -z "${file_wordlist}" ]]; then
+						if [[ -z "${file_wordlist}" || ! -f "${file_wordlist}" ]]; then
 							echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
 							continue
 						fi
@@ -319,7 +295,7 @@ function f7z_crack(){
 						echo -e "${b}[*] ${p}Proses crack kata sandi file 7z '${file_7z}' selesai.${r}"
 						continue
 					elif [[ "${teknik}" == "Prince Attack" ]]; then
-						if [[ -z "${file_wordlist}" ]]; then
+						if [[ -z "${file_wordlist}" || ! -f "${file_wordlist}" ]]; then
 							echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
 							continue
 						fi

@@ -101,7 +101,7 @@ function rar_crack(){
 		read -p "${ip}${program} (${im}${modul}${ip}) > " -a rar_c
 		if [[ "${#rar_c[@]}" -eq 3 ]]; then
 			# seting file rar
-			if [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "rar_file" ]]; then
+			if [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "rar_file" && -n "${rar_c[2]}" ]]; then
 				file_rar="${rar_c[2]}"
 				# cek apakah file rar ada apa kaga
 				if [[ ! -f "${file_rar}" ]]; then
@@ -109,18 +109,14 @@ function rar_crack(){
 					continue
 				fi
 				# cek apakah file rar merupakan file rar atau tidak
-                if ! file "${file_rar}" | grep -qi "RAR archive data"; then
+		                if ! file "${file_rar}" | grep -qi "RAR archive data"; then
 					echo -e "${m}[-] ${p}File '${file_rar}' bukan file RAR.${r}"
 					continue
 				fi
 				echo -e "${p}File RAR => ${file_rar}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting teknik
-			if [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "technique" ]];  then
+			elif [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "technique" && -n "${rar_c[2]}" ]];  then
 				daftar_teknik=("dict" "brute" "prince" "mask" "subsets")
 				teknik="${rar_c[2]}"
 				teknik_valid=false
@@ -150,12 +146,8 @@ function rar_crack(){
 				fi
 				echo -e "${p}Teknik => ${teknik}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting wordlist
-			if [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "wordlist_file" ]]; then
+			elif [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "wordlist_file" && -n "${rar_c[2]}" ]]; then
 				file_wordlist="${rar_c[2]}"
 				if [[ ! -f "${file_wordlist}" ]]; then
 					echo -e "${m}[-] ${p}File Wordlist '${file_wordlist}' tidak ditemukan.${r}"
@@ -163,12 +155,8 @@ function rar_crack(){
 				fi
 				echo -e "${p}File Wordlist => ${file_wordlist}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting panjang minimal kata sandi
-			if [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "min_length" ]]; then
+			elif [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "min_length" && -n "${rar_c[2]}" ]]; then
 				panjang_min="${rar_c[2]}"
 				if [[ ! "${panjang_min}" =~ ^[0-9]+$ ]]; then
 					echo -e "${m}[-] ${p}Panjang minimal kata sandi harus berupa angka.${r}"
@@ -184,12 +172,8 @@ function rar_crack(){
 				fi
 				echo -e "${p}Panjang minimal kata sandi => ${panjang_min}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting panjang maksimal kata sandi
-			if [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "max_length" ]]; then
+			elif [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "max_length" && -n "${rar_c[2]}" ]]; then
 				panjang_maks="${rar_c[2]}"
 				if [[ ! "${panjang_maks}" =~ ^[0-9]+$ ]]; then
 					echo -e "${m}[-] ${p}Panjang maksimal kata sandi harus berupa angka.${r}"
@@ -211,12 +195,8 @@ function rar_crack(){
 				fi
 				echo -e "${p}Panjang maksimal kata sandi => ${panjang_maks}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting mask pattern atau pola mask
-			if [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "mask_pattern" ]]; then
+			elif [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "mask_pattern" && -n "${rar_c[2]}" ]]; then
 				mask_pattern="${rar_c[2]}"
 				if [[ ! "${mask_pattern}" =~ ^(\?l|\?u|\?d|\?s|\?a)+$ ]]; then
 					echo -e "${m}[-] ${p}Pola mask '${mask_pattern}' tidak valid.${r}"
@@ -224,12 +204,8 @@ function rar_crack(){
 				fi
 				echo -e "${p}Pola mask => ${mask_pattern}${r}"
 				continue
-			else
-				error
-				continue
-			fi
 			# seting set karakter
-			if [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "charset" ]]; then
+			elif [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "charset" && -n "${rar_c[2]}" ]]; then
 				charset="${rar_c[2]}"
 				echo -e "${p}Karakter => ${charset}${r}"
 				continue
@@ -239,7 +215,7 @@ function rar_crack(){
 			fi
 		elif [[ "${#rar_c[@]}" -eq 1 ]]; then
 			if [[ "${rar_c[0]}" == "run" ]]; then
-				if [[ -z "${file_rar}" ]]; then
+				if [[ -z "${file_rar}" || ! -f "${file_rar}" ]]; then
 					echo -e "${m}[-] ${p}File RAR belum diseting.${r}"
 					continue
 				elif [[ -z "${teknik}" ]]; then
@@ -247,7 +223,7 @@ function rar_crack(){
 					continue
 				else
 					if [[ "${teknik}" == "Dictionary Attack" ]]; then
-						if [[ -z "${file_wordlist}" ]]; then
+						if [[ -z "${file_wordlist}" || ! -f "${file_wordlist}" ]]; then
 							echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
 							continue
 						fi
@@ -319,7 +295,7 @@ function rar_crack(){
 						echo -e "${b}[*] ${p}Proses crack kata sandi file RAR '${file_rar}' selesai.${r}"
 						continue
 					elif [[ "${teknik}" == "Prince Attack" ]]; then
-						if [[ -z "${file_wordlist}" ]]; then
+						if [[ -z "${file_wordlist}" || ! -f "${file_wordlist}" ]]; then
 							echo -e "${m}[-] ${p}File Wordlist belum diseting.${r}"
 							continue
 						fi
