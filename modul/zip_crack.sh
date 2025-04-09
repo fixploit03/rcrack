@@ -109,8 +109,7 @@ function zip_crack(){
 					continue
 				fi
 				# cek apakah file zip merupakan file zip atau tidak
-				zipinfo "${file_zip}" &>/dev/null
-				if [[ $? -ne 0 ]]; then
+                if ! file "${file_zip}" | grep -qi "Zip archive data"; then
 					echo -e "${m}[-] ${p}File '${file_zip}' bukan file ZIP.${r}"
 					continue
 				fi
