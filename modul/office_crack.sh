@@ -116,7 +116,7 @@ function office_crack(){
 					continue
 				fi
 				# cek apakah file office merupakan file office atau tidak
-		        if ! file "${file_office}" | grep -qi "CDFV2 Encrypted"; then
+				if ! file "${file_office}" | grep -qi "CDFV2 Encrypted"; then
 					echo -e "${m}[-] ${p}File '${file_office}' bukan file Office.${r}"
 					continue
 				fi
