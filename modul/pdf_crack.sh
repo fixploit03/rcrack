@@ -243,9 +243,13 @@ function pdf_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${file_pdf}'...${r}"
 						file_hash="${file_pdf}_hash.txt"
-						pdf2john "${file_pdf}" > "${file_hash}"
+						pdf2john "${file_pdf}" 1> "${file_hash}"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							continue
+						fi
+						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file PDF '${file_pdf}' berhasil diekstrak.${r}"
@@ -283,9 +287,13 @@ function pdf_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${file_pdf}'...${r}"
 						file_hash="${file_pdf}_hash.txt"
-						pdf2john "${file_pdf}" > "${file_hash}"
+						pdf2john "${file_pdf}" 1> "${file_hash}"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							continue
+						fi
+						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file PDF '${file_pdf}' berhasil diekstrak.${r}"
@@ -315,9 +323,13 @@ function pdf_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${file_pdf}'...${r}"
 						file_hash="${file_pdf}_hash.txt"
-						pdf2john "${file_pdf}" > "${file_hash}"
+						pdf2john "${file_pdf}" 1> "${file_hash}"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							continue
+						fi
+						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file PDF '${file_pdf}' berhasil diekstrak.${r}"
@@ -347,9 +359,13 @@ function pdf_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${file_pdf}'...${r}"
 						file_hash="${file_pdf}_hash.txt"
-						pdf2john "${file_pdf}" > "${file_hash}"
+						pdf2john "${file_pdf}" 1> "${file_hash}"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							continue
+						fi
+						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file PDF '${file_pdf}' berhasil diekstrak.${r}"
@@ -387,9 +403,13 @@ function pdf_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file PDF '${file_pdf}'...${r}"
 						file_hash="${file_pdf}_hash.txt"
-						pdf2john "${file_pdf}" > "${file_hash}"
+						pdf2john "${file_pdf}" 1> "${file_hash}"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							continue
+						fi
+						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file PDF '${file_pdf}' berhasil diekstrak.${r}"

@@ -243,9 +243,14 @@ function rar_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${file_rar}'...${r}"
 						file_hash="${file_rar}_hash.txt"
-						rar2john "${file_rar}" > "${file_hash}"
+						rar2john "${file_rar}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file RAR '${file_rar}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "Did not find a valid encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File RAR '${file_rar}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file RAR '${file_rar}' berhasil diekstrak.${r}"
@@ -283,9 +288,14 @@ function rar_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${file_rar}'...${r}"
 						file_hash="${file_rar}_hash.txt"
-						rar2john "${file_rar}" > "${file_hash}"
+						rar2john "${file_rar}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file RAR '${file_rar}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "Did not find a valid encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File RAR '${file_rar}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file RAR '${file_rar}' berhasil diekstrak.${r}"
@@ -315,9 +325,14 @@ function rar_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${file_rar}'...${r}"
 						file_hash="${file_rar}_hash.txt"
-						rar2john "${file_rar}" > "${file_hash}"
+						rar2john "${file_rar}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file RAR '${file_rar}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "Did not find a valid encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File RAR '${file_rar}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file RAR '${file_rar}' berhasil diekstrak.${r}"
@@ -347,9 +362,14 @@ function rar_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${file_rar}'...${r}"
 						file_hash="${file_rar}_hash.txt"
-						rar2john "${file_rar}" > "${file_hash}"
+						rar2john "${file_rar}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file RAR '${file_rar}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "Did not find a valid encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File RAR '${file_rar}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file RAR '${file_rar}' berhasil diekstrak.${r}"
@@ -387,9 +407,14 @@ function rar_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file RAR '${file_rar}'...${r}"
 						file_hash="${file_rar}_hash.txt"
-						rar2john "${file_rar}" > "${file_hash}"
+						rar2john "${file_rar}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file RAR '${file_rar}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "Did not find a valid encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File RAR '${file_rar}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file RAR '${file_rar}' berhasil diekstrak.${r}"

@@ -116,7 +116,7 @@ function office_crack(){
 					continue
 				fi
 				# cek apakah file office merupakan file office atau tidak
-				if ! file "${file_office}" | grep -qi "CDFV2 Encrypted"; then
+				if ! file "${file_office}" | grep -qi "CDFV2 Encrypted" && ! file "${file_office}" | grep -qi "Microsoft Word 2007+"; then
 					echo -e "${m}[-] ${p}File '${file_office}' bukan file Office.${r}"
 					continue
 				fi
@@ -243,9 +243,14 @@ function office_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file Office '${file_office}'...${r}"
 						file_hash="${file_office}_hash.txt"
-						office2john "${file_office}" > "${file_hash}"
+						office2john "${file_office}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file Office '${file_office}' berhasil diekstrak.${r}"
@@ -283,9 +288,14 @@ function office_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file Office '${file_office}'...${r}"
 						file_hash="${file_office}_hash.txt"
-						office2john "${file_office}" > "${file_hash}"
+						office2john "${file_office}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file Office '${file_office}' berhasil diekstrak.${r}"
@@ -315,9 +325,14 @@ function office_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file Office '${file_office}'...${r}"
 						file_hash="${file_office}_hash.txt"
-						office2john "${file_office}" > "${file_hash}"
+						office2john "${file_office}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file Office '${file_office}' berhasil diekstrak.${r}"
@@ -347,9 +362,14 @@ function office_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file Office '${file_office}'...${r}"
 						file_hash="${file_office}_hash.txt"
-						office2john "${file_office}" > "${file_hash}"
+						office2john "${file_office}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file Office '${file_office}' berhasil diekstrak.${r}"
@@ -387,9 +407,14 @@ function office_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file Office '${file_office}'...${r}"
 						file_hash="${file_office}_hash.txt"
-						office2john "${file_office}" > "${file_hash}"
+						office2john "${file_office}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file Office '${file_office}' berhasil diekstrak.${r}"

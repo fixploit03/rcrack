@@ -243,9 +243,14 @@ function zip_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
 						file_hash="${file_zip}_hash.txt"
-						zip2john "${file_zip}" > "${file_hash}"
+						zip2john "${file_zip}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
@@ -287,9 +292,14 @@ function zip_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
 						file_hash="${file_zip}_hash.txt"
-						zip2john "${file_zip}" > "${file_hash}"
+						zip2john "${file_zip}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
@@ -323,9 +333,14 @@ function zip_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
 						file_hash="${file_zip}_hash.txt"
-						zip2john "${file_zip}" > "${file_hash}"
+						zip2john "${file_zip}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
@@ -359,9 +374,14 @@ function zip_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
 						file_hash="${file_zip}_hash.txt"
-						zip2john "${file_zip}" > "${file_hash}"
+						zip2john "${file_zip}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"
@@ -403,9 +423,14 @@ function zip_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file ZIP '${file_zip}'...${r}"
 						file_hash="${file_zip}_hash.txt"
-						zip2john "${file_zip}" > "${file_hash}"
+						zip2john "${file_zip}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file ZIP '${file_zip}' berhasil diekstrak.${r}"

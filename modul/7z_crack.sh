@@ -243,9 +243,14 @@ function f7z_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${file_7z}'...${r}"
 						file_hash="${file_7z}_hash.txt"
-						7z2john "${file_7z}" > "${file_hash}"
+						7z2john "${file_7z}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file 7z '${file_7z}' berhasil diekstrak.${r}"
@@ -283,9 +288,14 @@ function f7z_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${file_7z}'...${r}"
 						file_hash="${file_7z}_hash.txt"
-						7z2john "${file_7z}" > "${file_hash}"
+						7z2john "${file_7z}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file 7z '${file_7z}' berhasil diekstrak.${r}"
@@ -315,9 +325,14 @@ function f7z_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${file_7z}'...${r}"
 						file_hash="${file_7z}_hash.txt"
-						7z2john "${file_7z}" > "${file_hash}"
+						7z2john "${file_7z}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file 7z '${file_7z}' berhasil diekstrak.${r}"
@@ -347,9 +362,14 @@ function f7z_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${file_7z}'...${r}"
 						file_hash="${file_7z}_hash.txt"
-						7z2john "${file_7z}" > "${file_hash}"
+						7z2john "${file_7z}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file 7z '${file_7z}' berhasil diekstrak.${r}"
@@ -387,9 +407,14 @@ function f7z_crack(){
 						fi
 						echo -e "${b}[*] ${p}Mengekstrak hash file 7z '${file_7z}'...${r}"
 						file_hash="${file_7z}_hash.txt"
-						7z2john "${file_7z}" > "${file_hash}"
+						7z2john "${file_7z}" 1> "${file_hash}" 2> "error.txt"
 						if [[ $? -ne 0 ]]; then
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							continue
+						fi
+						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
+							rm "error.txt"
 							continue
 						fi
 						echo -e "${h}[+] ${p}Hash file 7z '${file_7z}' berhasil diekstrak.${r}"
