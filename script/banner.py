@@ -19,12 +19,13 @@
 import random
 from colorama import Fore, Style
 
-m = Fore.LIGHTRED_EX
-h = Fore.LIGHTGREEN_EX
-k = Fore.LIGHTYELLOW_EX
-b = Fore.LIGHTBLUE_EX
-p = Fore.LIGHTWHITE_EX
-r = Style.RESET_ALL
+m = Fore.LIGHTRED_EX    # merah
+h = Fore.LIGHTGREEN_EX  # hijau
+k = Fore.LIGHTYELLOW_EX # kuning
+b = Fore.LIGHTBLUE_EX   # biru
+p = Fore.LIGHTWHITE_EX  # putih
+c = "\033[38;5;130m"    # cokelat
+r = Style.RESET_ALL     # reset
 
 program = "rcrack"
 deskripsi = "Crack berbagai jenis file menggunakan John The Ripper"
@@ -34,7 +35,7 @@ pembuat = "Rofi (Fixploit03)"
 by = "John The Ripper (https://github.com/openwall/john)"
 
 daftar_banner = [
-f"""
+fr"""
 {h}**********************************************************************{r}
 {h}*                                                                    *{r}
 {h}* {p}{program}                                                             {h}*{r}
@@ -47,7 +48,7 @@ f"""
 {h}*                                                                    *{r}
 {h}**********************************************************************{r}
 """,
-f"""
+fr"""
 {p}==========================================================={r}
        {b}[*] {p}Sedang crack password...{r}
 {r}
@@ -61,7 +62,7 @@ f"""
        {h}[+] {p}Clear password: {h}admin123{r}
 {p}==========================================================={r}
 """,
-f"""
+fr"""
 {m}                                                oooo       {r}
 {m}                                                 888       {r}
 {m}oooo d8b   ooooo   oooo d8b   oooo      ooooo    888  oooo {r}
@@ -74,7 +75,7 @@ f"""
 {b}[*] {p}Dibuat oleh: {pembuat}{r}
 {b}[*] {p}Github: {github}{r}
 """,
-f"""
+fr"""
 {m}          .                                                      .{r}
 {m}        .n                   .                 .                  n.{r}
 {m}  .   .dP                  dP                   9b                 9b.    .{r}
@@ -101,6 +102,22 @@ f"""
 {b}   * {h}){k}--------------{h}(+) {p}Dibuat oleh: Rofi (Fixploit03) {h}(+){k}-------------{h}( {b}*{r}
 {b}   * {h}){k}-----------------------{h}(+) {p}Versi: v1.0 {h}(+){k}-----------------------{h}( {b}*{r}
 {b}   * {h}){k}-------{h}(+) {p}Github: https://github.com/fixploit03/rcrack {h}(+){k}------{h}( {b}*{r}
+""",
+fr"""
+{b}       __I__{r}
+{b}   .-'"  .  "'-.{r}
+{b} .'  / . ' . \  '.{r}
+{b}/_.-..-..-..-..-._\ {p}.----------------------------------.{r}
+{b}         #{c}  _,,_   {p}( Kudengar hari ini akan turun hujan ){r}
+{b}         #{c}/`    `\ {p}/'----------------------------------'{r}
+{k}         {c}/ / {p}6 6{c}\ \{r}
+{k}         {c}\/\  Y /\/       /\-/\{r}
+{b}         #{c}/ `'U` \       /{p}a a  {c}\               _{r}
+{k}       {c}, (  \   | \     =\ Y  =/-~~~~~~-,_____/ ){r}
+{k}       {c}|\|\_/{b}#  {c}\_/       '^--'          ______/{r}
+{k}       {c}\/'.  \  /'\         \           /{r}
+{k}        {c}\    /=\  /         ||  |---'\  \{r}
+{k}        {c}/____)/____)       (_(__|   ((__| {h}{program} {versi}{r}
 """]
 
 print(random.choice(daftar_banner))
