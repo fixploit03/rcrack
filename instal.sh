@@ -8,6 +8,7 @@ daftar_dependensi=(
         "john"
         "john-data"
         "poppler-utils"
+        "pdfid"
 )
 
 apt-get update
