@@ -73,7 +73,7 @@ function help(){
 # Fungsi utama script
 function rcrack(){
 	while true; do
-		read -p "${ip}rcrack > " rcrack
+		read -e -r -p "${ip}rcrack > " rcrack
 		if [[ "${rcrack}" == "use zip_crack" ]]; then
 			if [[ -f "modul/zip_crack.sh" ]]; then
 				bash "modul/zip_crack.sh"
