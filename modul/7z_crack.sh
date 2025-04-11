@@ -116,7 +116,7 @@ function f7z_crack(){
 					continue
 				fi
 				# cek apakah file 7z merupakan file 7z atau tidak
-		                if ! file "${file_7z}" | grep -qi "7-zip archive data"; then
+		                if [[ "${file_7z##*.}" != "7z" ]] ; then
 					echo -e "${m}[-] ${p}File '${file_7z}' bukan file 7z.${r}"
 					continue
 				fi
@@ -248,7 +248,14 @@ function f7z_crack(){
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "7-Zip file nor a supported SFX file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -293,7 +300,14 @@ function f7z_crack(){
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "7-Zip file nor a supported SFX file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -330,7 +344,14 @@ function f7z_crack(){
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "7-Zip file nor a supported SFX file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -367,7 +388,14 @@ function f7z_crack(){
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "7-Zip file nor a supported SFX file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -412,7 +440,14 @@ function f7z_crack(){
 							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "7-Zip file nor a supported SFX file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "lzma2 compression found within" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file 7z '${file_7z}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File 7z '${file_7z}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue

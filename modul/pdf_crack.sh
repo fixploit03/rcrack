@@ -116,7 +116,7 @@ function pdf_crack(){
 					continue
 				fi
 				# cek apakah file pdf merupakan file pdf atau tidak
-			        if ! file "${file_pdf}" | grep -qi "PDF document"; then
+			        if [[ "${file_pdf##*.}" != "pdf" ]]; then
 					echo -e "${m}[-] ${p}File '${file_pdf}' bukan file PDF.${r}"
 					continue
 				fi
@@ -248,7 +248,13 @@ function pdf_crack(){
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							continue
 						fi
+						if pdfid "${file_pdf}" | grep -qo "Not a PDF document"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak valid atau rusak.${r}"
+							continue
+						fi
 						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi
@@ -292,7 +298,13 @@ function pdf_crack(){
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							continue
 						fi
+						if pdfid "${file_pdf}" | grep -qo "Not a PDF document"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak valid atau rusak.${r}"
+							continue
+						fi
 						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi
@@ -328,7 +340,13 @@ function pdf_crack(){
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							continue
 						fi
+						if pdfid "${file_pdf}" | grep -qo "Not a PDF document"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak valid atau rusak.${r}"
+							continue
+						fi
 						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi
@@ -364,7 +382,13 @@ function pdf_crack(){
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							continue
 						fi
+						if pdfid "${file_pdf}" | grep -qo "Not a PDF document"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak valid atau rusak.${r}"
+							continue
+						fi
 						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi
@@ -408,7 +432,13 @@ function pdf_crack(){
 							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							continue
 						fi
+						if pdfid "${file_pdf}" | grep -qo "Not a PDF document"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak valid atau rusak.${r}"
+							continue
+						fi
 						if pdfinfo "${file_pdf}" | grep -qo "Encrypted:       no"; then
+							echo -e "${m}[-] ${p}Hash file PDF '${file_pdf}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File PDF '${file_pdf}' tidak dienkripsi.${r}"
 							continue
 						fi

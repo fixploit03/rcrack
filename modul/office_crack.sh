@@ -116,7 +116,7 @@ function office_crack(){
 					continue
 				fi
 				# cek apakah file office merupakan file office atau tidak
-				if ! file "${file_office}" | grep -qi "CDFV2 Encrypted" && ! file "${file_office}" | grep -qi "Microsoft Word 2007+"; then
+				if [[ "${file_office##*.}" != "docx" && "${file_office##*.}" != "xlsx" && "${file_office##*.}" != "pptx" ]]; then
 					echo -e "${m}[-] ${p}File '${file_office}' bukan file Office.${r}"
 					continue
 				fi
@@ -248,7 +248,14 @@ function office_crack(){
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Invalid OLE file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File Office '${file_office}' rusak atau tidak valid.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -293,7 +300,14 @@ function office_crack(){
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Invalid OLE file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File Office '${file_office}' rusak atau tidak valid.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -330,7 +344,14 @@ function office_crack(){
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Invalid OLE file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File Office '${file_office}' rusak atau tidak valid.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -367,7 +388,14 @@ function office_crack(){
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Invalid OLE file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File Office '${file_office}' rusak atau tidak valid.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -412,7 +440,14 @@ function office_crack(){
 							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Invalid OLE file" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File Office '${file_office}' rusak atau tidak valid.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "file is unencrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file Office '${file_office}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File Office '${file_office}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue

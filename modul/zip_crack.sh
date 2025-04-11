@@ -116,7 +116,7 @@ function zip_crack(){
 					continue
 				fi
 				# cek apakah file zip merupakan file zip atau tidak
-		                if ! file "${file_zip}" | grep -qi "Zip archive data"; then
+		                if [[ "${file_zip##*.}" != "zip" ]]; then
 					echo -e "${m}[-] ${p}File '${file_zip}' bukan file ZIP.${r}"
 					continue
 				fi
@@ -248,7 +248,14 @@ function zip_crack(){
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Did not find End Of Central Directory" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -297,7 +304,14 @@ function zip_crack(){
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Did not find End Of Central Directory" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -338,7 +352,14 @@ function zip_crack(){
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Did not find End Of Central Directory" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -379,7 +400,14 @@ function zip_crack(){
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Did not find End Of Central Directory" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
@@ -428,7 +456,14 @@ function zip_crack(){
 							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							continue
 						fi
+						if grep -qo "Did not find End Of Central Directory" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
+							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak valid atau rusak.${r}"
+							rm "error.txt"
+							continue
+						fi
 						if grep -qo "is not encrypted" "error.txt"; then
+							echo -e "${m}[-] ${p}Hash file ZIP '${file_zip}' gagal diekstrak.${r}"
 							echo -e "${m}[-] ${p}File ZIP '${file_zip}' tidak dienkripsi.${r}"
 							rm "error.txt"
 							continue
