@@ -105,7 +105,7 @@ function rar_crack(){
 	status_mask_pattern="false"
 	status_charset="false"
 	while true; do
-		read -p "${ip}${program} (${im}${modul}${ip}) > " -a rar_c
+		read -e -r -p "${ip}${program} (${im}${modul}${ip}) > " -a rar_c
 		if [[ "${#rar_c[@]}" -eq 3 ]]; then
 			# seting file rar
 			if [[ "${rar_c[0]}" == "set" && "${rar_c[1]}" == "rar_file" && -n "${rar_c[2]}" ]]; then

@@ -105,7 +105,7 @@ function zip_crack(){
 	status_mask_pattern="false"
 	status_charset="false"
 	while true; do
-		read -p "${ip}${program} (${im}${modul}${ip}) > " -a zip_c
+		read -e -r -p "${ip}${program} (${im}${modul}${ip}) > " -a zip_c
 		if [[ "${#zip_c[@]}" -eq 3 ]]; then
 			# seting file zip
 			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "zip_file" && -n "${zip_c[2]}" ]]; then

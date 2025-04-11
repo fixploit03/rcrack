@@ -105,7 +105,7 @@ function pdf_crack(){
 	status_mask_pattern="false"
 	status_charset="false"
 	while true; do
-		read -p "${ip}${program} (${im}${modul}${ip}) > " -a pdf_c
+		read -e -r -p "${ip}${program} (${im}${modul}${ip}) > " -a pdf_c
 		if [[ "${#pdf_c[@]}" -eq 3 ]]; then
 			# seting file pdf
 			if [[ "${pdf_c[0]}" == "set" && "${pdf_c[1]}" == "pdf_file" && -n "${pdf_c[2]}" ]]; then

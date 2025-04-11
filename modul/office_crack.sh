@@ -105,7 +105,7 @@ function office_crack(){
 	status_mask_pattern="false"
 	status_charset="false"
 	while true; do
-		read -p "${ip}${program} (${im}${modul}${ip}) > " -a office_c
+		read -e -r -p "${ip}${program} (${im}${modul}${ip}) > " -a office_c
 		if [[ "${#office_c[@]}" -eq 3 ]]; then
 			# seting file office
 			if [[ "${office_c[0]}" == "set" && "${office_c[1]}" == "office_file" && -n "${office_c[2]}" ]]; then
