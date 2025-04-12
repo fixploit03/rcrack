@@ -9,4 +9,4 @@ rcrack</h1>
 
 <br>
 
-`rcrack` merupakan pengembangan lanjutan dari proyek Jono, yang dirancang untuk melakukan cracking kata sandi pada berbagai format file seperti ZIP, RAR, 7z, PDF, dan dokumen Microsoft Office (docx, xlsx dan pptx). 
+`rcrack` merupakan pengembangan lanjutan dari repositori Jono, yang dirancang untuk melakukan cracking kata sandi pada berbagai format file seperti ZIP, RAR, 7z, PDF, dan dokumen Microsoft Office (docx, xlsx dan pptx). 
