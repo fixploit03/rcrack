@@ -1,7 +1,7 @@
 
 
 <h1 align="center">
-  <img src="https://github.com/fixploit03/rcrack/blob/main/img/rcrack.png" width="35%"/><br>
+  <img src="https://github.com/fixploit03/rcrack/blob/main/img/rcrack.png" width="75%"/><br>
 rcrack</h1>
 
 <div align="center">
@@ -11,6 +11,4 @@ rcrack</h1>
 </div>
 
 
-Pengembangan dari repositori Jono!
-
-> Masih dalam tahap pengembangan ;)
+> Pengembangan dari repositori Jono, Masih dalam tahap pengembangan ;)
