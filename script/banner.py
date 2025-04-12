@@ -32,6 +32,7 @@ r = Style.RESET_ALL     # reset
 program = "rcrack"
 deskripsi = "Crack berbagai jenis file menggunakan John The Ripper"
 versi = "v1.0"
+modul= "5"
 github = "https://github.com/fixploit03/rcrack"
 pembuat = "Rofi (Fixploit03)"
 by = "John The Ripper (https://github.com/openwall/john)"
@@ -182,6 +183,29 @@ fr"""
 {c}                !  !{r}
 {c}                !  !{r}
 {c}                \__/{r}
+""",
+fr"""
+{h}
+{a}          .__....._             _.....__,{r}
+{a}            .'{p}: {h}o {p}:{a}':         ;'{p}: {h}o {p}:{a}'.{r}
+{a}            `. {p}`-' {a}.'.       .'. {p}`-' {a}.'{r}
+{a}              `---'             `---'{r}
+{r}
+{p}    _...----...      {m}...   ...{p}      {p}...----..._{r}
+{p} .-'__..-'''----    {m}`.  `'`  .'{p}    {p}----'''-..__`-.{r}
+{p}'.-'   _.--''''       {m}`-._.-'{p}       {p}''''--._   `-.`{r}
+{p}'  .-''                  {a}:                  {p}`'-.  `{r}
+{p}  '   {c}`.              {a}_.'''._              {c}.'   {p}`{r}
+{c}        `.       {a},.-''       ''-.,       {c}.'{r}
+{c}          `.                           .'{r}
+{c}            `-._                   _.-'{r}
+{c}                `''--...___...--''`{r}
+{r}
+{p}       =[ {h}{program} {versi}                    {p}]{r}
+{p}+ -- --=[ jumlah modul yang tersedia: {modul}  ]{r}
+{p}+ -- --=[ Dibuat oleh: {pembuat} ]{r}
+{r}
+{p}Dokumentasi {program}: {github}{r}
 """
 ]
 
