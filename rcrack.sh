@@ -25,6 +25,8 @@ r="\e[0m"
 # Input
 im=$'\e[1;31m'
 ip=$'\e[1;37m'
+iu=$'\e[4m'
+ir=$'\e[0m'
 
 # Tentang
 program="rcrack"
@@ -73,8 +75,10 @@ function help(){
 # Fungsi utama script
 function rcrack(){
 	while true; do
-		read -e -r -p "${ip}rcrack > " rcrack
-		if [[ "${rcrack}" == "use zip_crack" ]]; then
+		read -e -r -p "${ip}${iu}rcrack${ir} ${ip}> " rcrack
+		if [[ "${rcrack}" == "" ]]; then
+			continue
+		elif [[ "${rcrack}" == "use zip_crack" ]]; then
 			if [[ -f "modul/zip_crack.sh" ]]; then
 				bash "modul/zip_crack.sh"
 				break
