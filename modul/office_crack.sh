@@ -26,6 +26,8 @@ r="\e[0m"
 # Input
 im=$'\e[1;31m'
 ip=$'\e[1;37m'
+iu=$'\e[4m'
+ir=$'\e[0m'
 
 # Tentang
 program="rcrack"
@@ -105,8 +107,10 @@ function office_crack(){
 	status_mask_pattern="false"
 	status_charset="false"
 	while true; do
-		read -e -r -p "${ip}${program} (${im}${modul}${ip}) > " -a office_c
-		if [[ "${#office_c[@]}" -eq 3 ]]; then
+		read -e -r -p "${ip}${iu}${program}${ir} ${ip}(${im}${modul}${ip}) > " -a office_c
+		if [[ "${office_c}" == "" ]]; then
+			continue
+		elif [[ "${#office_c[@]}" -eq 3 ]]; then
 			# seting file office
 			if [[ "${office_c[0]}" == "set" && "${office_c[1]}" == "office_file" && -n "${office_c[2]}" ]]; then
 				file_office="${office_c[2]}"

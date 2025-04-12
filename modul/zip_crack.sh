@@ -26,6 +26,8 @@ r="\e[0m"
 # Input
 im=$'\e[1;31m'
 ip=$'\e[1;37m'
+iu=$'\e[4m'
+ir=$'\e[0m'
 
 # Tentang
 program="rcrack"
@@ -105,8 +107,10 @@ function zip_crack(){
 	status_mask_pattern="false"
 	status_charset="false"
 	while true; do
-		read -e -r -p "${ip}${program} (${im}${modul}${ip}) > " -a zip_c
-		if [[ "${#zip_c[@]}" -eq 3 ]]; then
+		read -e -r -p "${ip}${iu}${program}${ir} ${ip}(${im}${modul}${ip}) > " -a zip_c
+		if [[ "${zip_c}" == "" ]]; then
+			continue
+		elif [[ "${#zip_c[@]}" -eq 3 ]]; then
 			# seting file zip
 			if [[ "${zip_c[0]}" == "set" && "${zip_c[1]}" == "zip_file" && -n "${zip_c[2]}" ]]; then
 				file_zip="${zip_c[2]}"

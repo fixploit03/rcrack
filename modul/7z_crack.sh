@@ -26,6 +26,8 @@ r="\e[0m"
 # Input
 im=$'\e[1;31m'
 ip=$'\e[1;37m'
+iu=$'\e[4m'
+ir=$'\e[0m'
 
 # Tentang
 program="rcrack"
@@ -105,8 +107,10 @@ function f7z_crack(){
 	status_mask_pattern="false"
 	status_charset="false"
 	while true; do
-		read -e -r -p "${ip}${program} (${im}${modul}${ip}) > " -a i7z_c
-		if [[ "${#i7z_c[@]}" -eq 3 ]]; then
+		read -e -r -p "${ip}${iu}${program}${ir} ${ip}(${im}${modul}${ip}) > " -a i7z_c
+		if [[ "${i7z_c}" == "" ]]; then
+			continue
+		elif [[ "${#i7z_c[@]}" -eq 3 ]]; then
 			# seting file 7z
 			if [[ "${i7z_c[0]}" == "set" && "${i7z_c[1]}" == "7z_file" && -n "${i7z_c[2]}" ]]; then
 				file_7z="${i7z_c[2]}"

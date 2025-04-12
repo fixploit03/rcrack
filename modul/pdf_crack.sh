@@ -26,6 +26,8 @@ r="\e[0m"
 # Input
 im=$'\e[1;31m'
 ip=$'\e[1;37m'
+iu=$'\e[4m'
+ir=$'\e[0m'
 
 # Tentang
 program="rcrack"
@@ -105,8 +107,10 @@ function pdf_crack(){
 	status_mask_pattern="false"
 	status_charset="false"
 	while true; do
-		read -e -r -p "${ip}${program} (${im}${modul}${ip}) > " -a pdf_c
-		if [[ "${#pdf_c[@]}" -eq 3 ]]; then
+		read -e -r -p "${ip}${iu}${program}${ir} ${ip}(${im}${modul}${ip}) > " -a pdf_c
+		if [[ "${pdf_c}" == "" ]]; then
+			continue
+		elif [[ "${#pdf_c[@]}" -eq 3 ]]; then
 			# seting file pdf
 			if [[ "${pdf_c[0]}" == "set" && "${pdf_c[1]}" == "pdf_file" && -n "${pdf_c[2]}" ]]; then
 				file_pdf="${pdf_c[2]}"
