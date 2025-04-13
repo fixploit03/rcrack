@@ -111,7 +111,7 @@ def process_file(filename):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: %s <ODF files>" % sys.argv[0], file=sys.stderr)
+        print("Usage: %s <OpenOffice / LibreOffice files>" % sys.argv[0], file=sys.stderr)
         sys.exit(-1)
 
     for i in range(1, len(sys.argv)):
