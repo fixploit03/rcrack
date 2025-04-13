@@ -9,4 +9,14 @@ rcrack</h1>
 
 <br>
 
-`rcrack` merupakan pengembangan lanjutan dari repositori Jono, yang dirancang untuk melakukan cracking kata sandi pada berbagai format file seperti ZIP, RAR, 7z, PDF, dan dokumen Microsoft Office (docx, xlsx dan pptx). 
+`rcrack` adalah .... [masih dalam tahap pengembangan]
+
+## Peringatan 
+
+```
+Harap jangan menggunakan program ini untuk melakukan hal-hal bodoh.
+
+Pembuat tidak bertanggung jawab atas kerusakan yang disebabkan oleh program ini.
+
+GUNAKAN DENGAN RISIKO ANDA SENDIRI.
+```
